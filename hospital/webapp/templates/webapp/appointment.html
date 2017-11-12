@@ -1,0 +1,130 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+<style>
+
+.login-block {
+    font-family: Montserrat;
+    width: 700px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    border-top: 5px solid #ff656c;
+    margin: 0 auto;
+}
+
+.login-block h1 {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.login-block input {
+    width: 40%;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-family: Montserrat;
+    padding: 0 20px 0 50px;
+    outline: none;
+}
+
+.login-block input:active, .login-block input:focus {
+    border: 1px solid #ff656c;
+}
+.login-block button {
+    width: 100%;
+    height: 40px;
+    background: #ff656c;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #e15960;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Montserrat;
+    outline: none;
+    cursor: pointer;
+}
+#xx{
+    color:#ffffff;
+}
+
+</style>
+{% load staticfiles %}
+<script
+  src="{% static 'webapp/jquery-3.2.1.slim.min.js' %}"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+  crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function() {
+  $("#specialization").change(function() {
+    var x ="." +  ($(this)).val() ;
+    console.log(x);
+    $("#doctor").children("option").hide();
+    $("#doctor").children(x).show();
+  });
+  
+});
+     </script> 
+<div class="container-fluid">
+<div class="login-block">
+
+    <h1>Book an appointment</h1>
+    <form action="{% url 'appointment' %}" method="post">
+    	{% csrf_token %}
+        Select specialization(*):
+        <select name="specialization" id="specialization" required>
+            
+            {% for x in specialization %}
+                <option value="{{ x }}">{{ x }}</option>
+            {% endfor %}
+        </select>
+
+
+
+         Select doctor(*):
+        <select name="doctorID" id="doctor" required>
+            {% for x in data %}
+            {% for y in x %}
+            {% if y != x.0 %}
+                <option hidden class="{{ x.0 }}" value="{{ y.1 }}">{{ y }}</option>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </select>
+
+        Date: <input type="date" name="date" required>
+        <br/>
+        <hr/>
+        {% if name %}
+        <button>Proceed as {{ name }}</button>
+        {% else %}
+        <button><a id="xx" href="{% url 'signup' %}">Register and proceed</a></button>
+        {% endif %}
+        {{ message }}
+
+    
+</form>
+
+</div>
+</div>
+
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+
+
+{% endblock %}

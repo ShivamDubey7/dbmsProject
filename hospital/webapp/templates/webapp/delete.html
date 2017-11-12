@@ -1,0 +1,119 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+<style>
+
+
+.table {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.xrow {
+  display: table-row;
+  background: #f6f6f6;
+}
+.xrow:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.xrow.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.xrow.green {
+  background: #27ae60;
+}
+.xrow.blue {
+  background: #2980b9;
+}
+.xrow.purple {
+  background: #668cff;
+}
+@media screen and (max-width: 580px) {
+  .xrow {
+    padding: 8px 0;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 12px;
+    display: block;
+  }
+}
+
+</style>
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+
+{{ table_name }}<br/>
+{% if table_details %}
+<form action="{% url 'alterdb' %}/delete" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="table" value="{{ table_name }}">
+	<input type="hidden" name="field" value="{{ table_field.0 }}">
+<div class="table">
+	<div class="xrow header">
+		{% for x in table_field %}
+			<div class="cell">{{ x }}</div>
+		{% endfor %}
+		<div class="cell">Check to delete</div>
+	</div>
+
+	{% for x in table_details %}
+	{% if table_name == "images" %}
+	<div class="xrow">
+	<div class="cell">{{ x.0 }}</div>
+	<div class="cell">{{ x.1 }}</div>
+	<div class="cell"><img src="data:image/png;base64,{{ x.2 }}"  height="250px"></div>
+	<div class="cell"><input type="checkbox" name="id" value="{{ x.0 }}"></div>
+	</div>
+	{% else %}
+	<div class="xrow">
+	{% for y in x %}
+		<div class="cell">{{ y }}</div>
+	{% endfor %}
+	<div class="cell"><input type="checkbox" name="id" value="{{ x.0 }}"></div>
+	</div>
+	{% endif %}
+	{% endfor %}
+	<input type="submit" value="delete">
+
+</div>
+{{ message }}
+{% else %}
+	Table is empty
+{% endif %}
+<a href="{% url 'admin' %}">Return </a>
+
+
+
+		
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+

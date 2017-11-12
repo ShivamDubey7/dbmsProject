@@ -1,0 +1,158 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+<style>
+
+.login-block {
+    font-family: Montserrat;
+    width: 320px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    border-top: 5px solid #ff656c;
+    margin: 0 auto;
+}
+
+.login-block h1 {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.login-block input {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-family: Montserrat;
+    padding: 0 20px 0 50px;
+    outline: none;
+}
+
+.login-block input#username {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#username:focus {
+    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input#password:focus {
+    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+    background-size: 16px 80px;
+}
+
+.login-block input:active, .login-block input:focus {
+    border: 1px solid #ff656c;
+}
+
+.login-block button {
+    width: 100%;
+    height: 40px;
+    background: #ff656c;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #e15960;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Montserrat;
+    outline: none;
+    cursor: pointer;
+}
+</style>
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+
+
+
+<div class="container-fluid">
+<div class="login-block">
+
+    <h1>Adding an entry into {{ table_name }}</h1>
+    <form enctype="multipart/form-data" action="{% url 'alterdb' %}/add/{{ table_name }}" method="post">
+    	{% csrf_token %}
+    	<input type="hidden" name="table" value="{{ table_name }}">
+	{% for field in table_details %}
+	{% if field.5 != 'auto_increment' %}
+	
+
+	{% if field.0 == 'date' %}
+	<input type="date" placeholder="date" min="2000-01-01" name="{{ field.0 }}">
+	{% elif field.0 == 'password' %}
+	<input placeholder="password" type="password" name="{{ field.0 }}">
+                {% elif field.0 == 'image' %}
+                <input type="file" name="image">
+	{% elif field.0 == "gender" %}
+	Gender:
+	<select name="gender">
+		<option value="M">male</option>
+		<option value="F">female</option>
+		<option value="P">prefer not to say</option>
+	</select>
+	{% elif field.0 == 'patientID' %}
+	PatientID:
+	<select name="patientID">
+		{% for x in patientID %}
+			<option>{{ x }}</option>
+		{% endfor %}
+	</select>
+	{% elif field.0 == "doctorID" %}
+	DoctorID:
+	<select name="doctorID">
+		{% for x in doctorID %}
+			<option>{{ x }}</option>
+		{% endfor %}
+	</select>
+	{% elif field.0 == "appID" %}
+	AppointementID:
+	<select name="appID">
+		{% for x in appID %}
+		<option>{{ x }}</option>
+		{% endfor %}
+	{% elif field == "email" %}
+	<input type="email" name="{{ field.0 }}" placeholder="email">
+	{% elif field.1 == "time" %}
+	{{ field.0 }} :
+	<input type="time" name="{{ field.0 }}" placeholder="{{ field.0 }}">
+	{% else %}
+		<input placeholder="{{ field.0 }}
+{% if field.2 == 'NO' %}
+	(*)
+{% endif %}  {{ field.1 }}  {{ field.3 }}" type="text" name="{{ field.0 }}">
+	{% endif %}
+
+	{% endif %}
+	{% endfor %}
+
+
+    	<center>{{ message }}</center>
+    <button>Submit</button>
+    <center><a href="{% url 'admin' %}">Return</a></center>
+</form>
+
+</div>
+</div>
+
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+
+
+{% endblock %}

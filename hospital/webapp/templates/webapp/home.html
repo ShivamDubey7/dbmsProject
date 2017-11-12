@@ -1,0 +1,135 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+	{% load staticfiles %}
+	<div class="container-fluid">
+	<div class="row"> 
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+
+
+<div class="container-fluid" >
+		<div class="row">
+			<div class="col-md-8">
+			<!-- carousel -->
+				<div class="container-fluid" >
+					<div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1"></li>
+							<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner" style="height:400px;">
+							<div class="item active">
+								<img src="data:image/png;base64,{{ carousel.0 }}">
+							</div>
+							<div class="item">
+								<img src="data:image/png;base64,{{ carousel.1 }}">
+							</div>
+							
+							<div class="item">
+								<img src="data:image/png;base64,{{ carousel.2 }}">
+							</div>
+							
+						</div>
+
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left"></span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+						</a>
+					</div>
+				</div>	
+			</div>
+			<div class="col-md-4">
+				<div class="card card-block" style="height:200px">
+				<center><h4 class="btn btn-primary"><a style="color:#ffffff;" href="{% url 'appointment' %}">Book an appointment</a></h4>
+				<h4 class="card-title">Helpline : (+91)-8765775023</h4>
+				<h3 class="card-text">Emergency No. : 100</h3></center>
+				</div>
+
+
+
+
+
+				<div class="card" style="font-size:20px; height:200px;text-align:center;">
+				<h3 class="card-title">Search for specialist</h3>
+				<div class="card-block">
+				<form method="post" action="{% url 'team' %}">
+					{% csrf_token %}
+					<select name="specialization" class="dropdown">
+						{% for sp in specialization %}
+						<option>{{ sp }}</option>
+						{% endfor %}
+					</select>
+					<br/>
+					<input class="btn btn-success" type="submit" value="Go!">
+				</form>
+				</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<!-- patient feedback section -->
+<div class="container-fluid">
+	<div class="row special">
+		<div class="col-md-4">
+			<div class="container-fluid">
+				<div class="row xrow">
+					<div class="xexample-2 xcard">
+						<div class="xwrapper">
+							<div class="xheader">
+							</div>
+							<div class="xdata">
+								<div class="xcontent">
+								<h1 class="xtitle"><a href="#">Neural</a></h1>
+						
+								<a href="#" class="xbutton">Read more</a>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+
+
+
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="xexample-2 xcard">
+						<div class="xwrapper">
+							<div class="xheader">
+							</div>
+							<div class="xdata">
+								<div class="xcontent">
+								<h1 class="xtitle"><a href="#">Heart</a></h1>
+								<a href="#" class="xbutton">Read more</a>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+
+
+
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
+
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+	</div>
+{% endblock %}

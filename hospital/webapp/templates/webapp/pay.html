@@ -1,0 +1,102 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+
+<style>
+
+
+.table {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.xrow {
+  display: table-row;
+  background: #f6f6f6;
+}
+.xrow:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.xrow.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.xrow.green {
+  background: #27ae60;
+}
+.xrow.blue {
+  background: #2980b9;
+}
+.xrow.purple {
+  background: #668cff;
+}
+@media screen and (max-width: 580px) {
+  .xrow {
+    padding: 8px 0;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 12px;
+    display: block;
+  }
+}
+
+</style>
+
+
+{% if bill %}
+<div class="table">
+	<div class="xrow header">
+		{% for x in bill_details %}
+			<div class="cell">{{ x.0 }}</div>
+		{% endfor %}
+		<div class="cell"></div>
+	</div>
+
+	{% for x in bill %}
+	<div class="xrow">
+	{% for y in x %}
+		<div class="cell">{{ y }}</div>
+	{% endfor %}
+	{% if x.2 != x.3 %}
+	<form action="{% url 'pay' %}" method="post">
+		{% csrf_token %}
+		<div class="cell"><button class="btn btn-danger" value="{{ x.0 }}" name="del">Pay</button></div>
+	</form>
+	{% else %}
+		<div class="cell">Paid</div>
+	{% endif %}
+	</div>
+	{% endfor %}
+</div>
+{% else %}
+No pending bills!!
+{% endif %}
+
+
+
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+
+
+{% endblock %}

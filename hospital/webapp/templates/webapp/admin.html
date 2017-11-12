@@ -1,0 +1,91 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+
+<style>
+
+
+.table {
+  margin: 0 0 40px 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  display: table;
+}
+@media screen and (max-width: 580px) {
+  .table {
+    display: block;
+  }
+}
+
+.xrow {
+  display: table-row;
+  background: #f6f6f6;
+}
+.xrow:nth-of-type(odd) {
+  background: #e9e9e9;
+}
+.xrow.header {
+  font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+}
+.xrow.green {
+  background: #27ae60;
+}
+.xrow.blue {
+  background: #2980b9;
+}
+.xrow.purple {
+  background: #668cff;
+}
+@media screen and (max-width: 580px) {
+  .xrow {
+    padding: 8px 0;
+    display: block;
+  }
+}
+
+.cell {
+  padding: 6px 12px;
+  display: table-cell;
+}
+@media screen and (max-width: 580px) {
+  .cell {
+    padding: 2px 12px;
+    display: block;
+  }
+}
+
+</style>
+
+
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+		Welcome {{ name }} <br/>
+		<form action="{% url 'admin' %}alterdb" method="post">
+			{% csrf_token %}
+			Select a table:
+			<select name="table">
+				{% for entry in tables %}
+				<option>{{ entry }}</option>
+				{% endfor %}
+			</select>
+			<br/>
+			<button class="btn btn-primary" type="submit" name="method" value="Add">Add </button>
+			<button class="btn btn-primary" type="submit" name="method" value="View/Delete">View/delete</button>
+		</form>
+<!-- 		<form action="{% url 'admin' %}" method="post">
+			<button class="btn" name="what" value="add">Record a payment</button>
+		</form> -->
+
+
+
+
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+
+
+{% endblock %}

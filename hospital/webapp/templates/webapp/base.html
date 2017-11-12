@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<title>Manish Hopital</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'webapp/css/bootstrap.min.css' %}">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<style>
+.special{
+    margin:0px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'arial';
+    }
+li {
+    list-style: none;
+}
+a:hover,
+a:visited,
+a {
+    text-decoration: none;
+}
+h1,
+h2 {
+    font-weight: bold;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+    margin-bottom: 0;
+    margin-top: 8px;
+    transition: all .5s ease 0s;
+    -webkit-transition: all .5s ease 0s;
+    -moz-transition: all .5s ease 0s;
+    -o-transition: all .5s ease 0s;
+    -ms-transition: all .5s ease 0s;
+}
+.nav-bar {
+    margin-top: 29px;
+}
+.navbar-toggle span {
+    color: #fff;
+}
+ul.nav {
+    margin: 0;
+    padding: 0;
+}
+.navbar-default .navbar-nav>li>a {
+    font-size: 16px;
+    color: #737373;
+     
+    transition: all .7s ease 0s;
+    -webkit-transition: all .7s ease 0s;
+    -moz-transition: all .7s ease 0s;
+    -o-transition: all .7s ease 0s;
+    -ms-transition: all .7s ease 0s;
+    padding: 14px 15px;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: #42b3e5;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #000;
+}
+li a.active {
+    color: #42b3e5 !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+    margin-top: 4px;
+}
+.carousel{
+    border-radius:-10px -10px -10px;
+}
+.carousel-caption h3{
+    font-family:sans-serif;
+    font-size:20px;
+
+}
+
+
+	</style>
+
+</head>
+<body>
+	
+	<!-- ====================================================
+	header section -->
+	<nav class="navbar navbar-inverse navbar-static-top"  style="background: #000000;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 header-logo">
+					<a href="{% url 'home' %}">
+						<div class="row">
+							<div class="col-md-3" style="text-align: right;"><img width="100px" src="{% static 'webapp/img/logo.png' %}" alt="" class="img-responsive logo"></div>
+							<div class="col-md-2" style="text-align: left;"><img width="200px" src="{% static 'webapp/img/logo_name.png' %}" alt="Manish Hospital" ></div>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-8">
+				<nav class="navbar  navbar-default">
+					<div class="container-fluid nav-bar">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right">
+							<li><a class="menu" href="{% url 'about' %}">About us</a></li>
+
+							<li><a class="menu" href="{% url 'home' %}team">Our team</a></li>
+							<li><a class="menu" href="{% url 'pay' %}"> Pay Online</a></li>
+							<li><a class="menu" href="{% url 'contact' %}">Contact us</a></li>
+
+							{% if name %}
+							{% if type != "admins" %}
+							<li><a class="menu" href="{% url 'profile' %}" >{{ name }}</a></li>
+							{% endif %}
+							{% else %}
+							<li><a class="menu" href="{% url 'home' %}login">Login</a></li>
+							{% endif %}
+							{% if name and type %}
+							{% if type == "admins" %}
+							<li><a class="menu" href="{% url 'admin' %}">Dashboard</a></li>
+							{% endif %}
+							{% endif %}
+							{% if name %}
+							<li><a class="menu" href="{% url 'logout' %}">Logout</a></li>
+							{% endif %}
+							</ul>
+						</div>
+					</div>
+				</nav>
+				</div>
+			</div>
+		</div>
+	</nav> 
+	{% block body %}
+	{% endblock %}
+
+	{% load staticfiles %}
+	<script src="{% static 'webapp/js/jquery-2.1.1.js' %}"></script>
+	<script src="{% static 'webapp/js/bootstrap.min.js' %}"></script>
+
+
+</body>
+</html>
