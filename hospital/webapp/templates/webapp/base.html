@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
 	<title>Manish Hopital</title>
-	{% load staticfiles %}
-	<link rel="stylesheet" href="{% static 'webapp/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<script src= "https://www.payumoney.com/Api/REST/op/buttonScript" async="true" > </script>
+	<script>
+	    function dubey(){
+	      window.PUM.setData("500", "454ty","Appointment");
+	      window.PUM.pay()
+	    };
+	</script>
+	<script
+  src="https://code.jquery.com/jquery-2.2.1.min.js"
+  integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+  crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<style>
 .special{
     margin:0px;
@@ -53,7 +64,7 @@ ul.nav {
 .navbar-default .navbar-nav>li>a {
     font-size: 16px;
     color: #737373;
-     
+
     transition: all .7s ease 0s;
     -webkit-transition: all .7s ease 0s;
     -moz-transition: all .7s ease 0s;
@@ -84,12 +95,39 @@ li a.active {
 
 }
 
+.footer1{
+	background-color:#343931;
+	height:300px;
+	font-size:15;
+	color:#DCE3D3;
+}
+
+.footer2{
+	background-color:#212420;
+	height:50px;
+	font-size:17;
+}
+
+.f2_left{
+	float:left;
+	padding:12 0 0 0px;
+	font-size:17;
+	color:#B8C1AB;
+}
+
+.f2_right{
+	float:right;
+	padding:12 0 0 0px;
+	font-size:19;
+	color:#D1DAC4;
+}
+
 
 	</style>
 
 </head>
 <body>
-	
+
 	<!-- ====================================================
 	header section -->
 	<nav class="navbar navbar-inverse navbar-static-top"  style="background: #000000;">
@@ -98,8 +136,8 @@ li a.active {
 				<div class="col-md-4 header-logo">
 					<a href="{% url 'home' %}">
 						<div class="row">
-							<div class="col-md-3" style="text-align: right;"><img width="100px" src="{% static 'webapp/img/logo.png' %}" alt="" class="img-responsive logo"></div>
-							<div class="col-md-2" style="text-align: left;"><img width="200px" src="{% static 'webapp/img/logo_name.png' %}" alt="Manish Hospital" ></div>
+							<div class="col-md-3" style="text-align: right;"><img width="100px" src="data:image/png;base64,{{ logo.0 }}" alt="" class="img-responsive logo"></div>
+							<div class="col-md-2" style="text-align: left;"><img width="200px" src="data:image/png;base64,{{ logo.1 }}" alt="Manish Hospital" ></div>
 						</div>
 					</a>
 				</div>
@@ -108,11 +146,10 @@ li a.active {
 					<div class="container-fluid nav-bar">
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
-							<li><a class="menu" href="{% url 'about' %}">About us</a></li>
 
 							<li><a class="menu" href="{% url 'home' %}team">Our team</a></li>
 							<li><a class="menu" href="{% url 'pay' %}"> Pay Online</a></li>
-							<li><a class="menu" href="{% url 'contact' %}">Contact us</a></li>
+                            <li><a class="menu" href="{% url 'appointment' %}">Book appointment</a></li>
 
 							{% if name %}
 							{% if type != "admins" %}
@@ -136,13 +173,60 @@ li a.active {
 				</div>
 			</div>
 		</div>
-	</nav> 
+	</nav>
 	{% block body %}
 	{% endblock %}
 
-	{% load staticfiles %}
-	<script src="{% static 'webapp/js/jquery-2.1.1.js' %}"></script>
-	<script src="{% static 'webapp/js/bootstrap.min.js' %}"></script>
+
+
+
+
+
+	<br/><br/>
+
+	<div class="container-fluid">
+		<div class="row footer1" style="height:300px;">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-4">
+				<h3>About Us</h3>
+				<br/>
+				<p>Providing best services in the domain, through our highly experienced squad. Your healthy life matters a lot to us.</p>
+			</div>
+
+			<div class="col-sm-4">
+				<h3>Contact Us</h3>
+				<br/>
+				<ul>
+					<li>
+						<address>
+						Manish Hospital<br>
+						Infront of Gyandeep academy,<br>
+						Chitaipur,<br>
+						Varanasi-221005<br>
+						Uttar Pradesh
+					  	</address>
+					</li>
+					<li> +91 87657 75023</li>
+					<li> +91 94546 84161</li>
+					<li> shivam7.iitbhu@gmail.com</li>
+				</ul>
+			</div>
+
+			<div class="col-sm-2"></div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row footer2">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
+				<p class="f2_left">Copyright &copy; <?php echo date("Y");?> - All Rights Reserved</p>
+				<p class="f2_right">Created by shivam7</p>
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+	</div>
+
 
 
 </body>

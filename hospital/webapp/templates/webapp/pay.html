@@ -79,7 +79,15 @@
 	{% if x.2 != x.3 %}
 	<form action="{% url 'pay' %}" method="post">
 		{% csrf_token %}
-		<div class="cell"><button class="btn btn-danger" value="{{ x.0 }}" name="del">Pay</button></div>
+		<!--<div class="cell"><button class="btn btn-danger" value="{{ x.0 }}" name="del">Pay</button></div>-->
+		<div class="cell"><span class='pm-button' id='F6F850F3E4A7A8D4B11286CFEF871005' onclick="dubey()">
+  <span class="state active">
+    <input type="image" src="https://file.payumoney.com/images/payby_payumoney/new_buttons/21.png" width="131" height="37">
+  </span>
+  <span class="state clicked" style="display:none" >
+    <input type="image" src="https://file.payumoney.com/images/payby_payumoney/new_buttons/submitted/21.png" width="131" height="37">
+  </span>
+</span></div>
 	</form>
 	{% else %}
 		<div class="cell">Paid</div>
@@ -97,6 +105,6 @@ No pending bills!!
 	<div class="col-md-1">
 	</div>
 </div>
-
+<br/><br/><br/><br/>
 
 {% endblock %}

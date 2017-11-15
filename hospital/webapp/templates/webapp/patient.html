@@ -68,9 +68,10 @@
 Past appointments
 <div class="table">
 	<div class="xrow header">
-		{% for x in appointment_details %}
-			<div class="cell">{{ x.0 }}</div>
-		{% endfor %}
+		<div class="cell">ID</div>
+		<div class="cell">Doctor name</div>
+		<div class="cell">Date</div>
+		<div class ="cell" >Not willing?</div>
 	</div>
 
 	{% for x in appointment_done %}
@@ -87,9 +88,9 @@ Past appointments
 Appointments coming-
 <div class="table">
 	<div class="xrow header green">
-		{% for x in appointment_details %}
-			<div class="cell">{{ x.0 }}</div>
-		{% endfor %}
+		<div class="cell">ID</div>
+		<div class="cell">Doctor name</div>
+		<div class="cell">Date</div>
 		<div class ="cell" >Not willing?</div>
 	</div>
 	{% for x in appointment_coming %}
@@ -101,8 +102,8 @@ Appointments coming-
 			{% csrf_token %}
 			<div class="cell"><button value="{{ x.0 }}" name="del">Cancel</button></div>
 		</form>
-		
-		
+
+
 	</div>
 	{% endfor %}
 </div>
@@ -113,9 +114,10 @@ Appointments coming-
 Medical records-
 <div class="table">
 	<div class="xrow header">
-		{% for x in record_details %}
-			<div class="cell">{{ x.0 }}</div>
-		{% endfor %}
+		<div class="cell">Appointment-ID</div>
+		<div class="cell">Doctor name</div>
+		<div class="cell">Appointment date</div>
+		<div class="cell">Remarks</div>
 	</div>
 
 	{% for x in record %}
@@ -170,7 +172,7 @@ Bills-
 {% endif %}
 	{% if appointment_done or appointment_today or appointment_coming or report or record or bill %}
 	{% else %}
-	<center><div class="msg">Nothing to show.</div></center>
+	<center><div class="msg" style="font-size:25px;"><br/><br/><br/>Nothing to show.<br/><br/></div></center>
 	{% endif %}
 
 
@@ -178,14 +180,14 @@ Bills-
 	<div class="col-md-1">
 	</div>
 </div>
-
+<br/><br/><br/><br/>
 
 <!-- <div class="modify">
 	<center><h3>Modify details</h3></center>
 	<hr/>
 	<form action="{url 'modifypat' %}" method="post">
 		{% csrf_token %}
-		
+
 	</form>
 </div> -->
 

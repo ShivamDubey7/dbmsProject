@@ -81,14 +81,12 @@
 <div class="container-fluid">
 <div class="login-block">
 
-    <h1>Login</h1>
-    <form action="{% url 'login' %}" method="post">
+    <h1>Verify Email-id</h1>
+    <form action="" method="post">
     	{% csrf_token %}
     <input type="text" placeholder="Email" id="username" name="email"/>
-    <input type="password" placeholder="Password" id="password" name="pword"/>
-    	<center>{{ message }}</center>
     <button>Submit</button>
-    <center><a href="{% url 'verifymail' %}">Not registered? Sign up!</a></center>
+    <br/><br/>{{ message }} <br/><br/>
 </form>
 
 </div>

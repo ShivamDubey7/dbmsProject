@@ -1,0 +1,56 @@
+{% extends 'webapp/base.html' %}
+{% block body %}
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+<style>
+
+.login-block {
+    font-family: Montserrat;
+
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    border-top: 5px solid #ff656c;
+
+}
+
+.login-block h1 {
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+</style>
+<div class="container-fluid">
+<div class="login-block">
+
+
+    <form action="{% url 'recordPayment' %}" method="post">
+    	{% csrf_token %}
+        <select name="id">
+            {% for x in bill %}
+            <option value="{{ x.0 }}">Appointment ID-{{ x.1 }}, Patient Name-{{ x.2 }}, Date on bill- {{ x.4 }}, Amount remaining -{{ x.3 }}</option>
+            {% endfor %}
+        </select>
+
+<br/><br/><br/>
+    <center><a href="{% url 'admin' %}">Return</a></center>
+    <button>Submit</button>
+
+</form>
+
+</div>
+</div>
+
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
+<br/><br/><br/><br/>
+
+{% endblock %}

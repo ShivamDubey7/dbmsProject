@@ -84,7 +84,7 @@
     <h1>Signup</h1>
     <form action="{% url 'signup' %}" method="post">
     	{% csrf_token %}
-    <input type="number" placeholder="Aadhar number" name="aadharNo"/>
+    <input type="number" placeholder="Aadhar number" min="100000000000" max="999999999999" name="aadharNo"/>
         <input type="text" placeholder="Name"  name="name"/>
        <center> Gender
         <select name="gender" class="selectpicker">
@@ -93,10 +93,10 @@
 <option value="O">Others</option>
 <option value="N">Prefer not to say</option>
         </select><br/><br/></center>
-            <input type="number" placeholder="Age"  name="age"/>
+            <input type="number" placeholder="Age"  min="1" name="age"/>
+            <input type="number" placeholder="Phone"  min="7000000000" max="9999999999" name="phone"/>
             <input type="text" placeholder="Blood Group"  name="bloodgroup"/>
-            <input type="number" placeholder="Phone"  name="phone"/>
-            <input type="email" placeholder="Email"  name="email"/>
+            <input type="email" placeholder="Email"  name="email" value="{{ email }}" readonly/>
             <input type="text-area" placeholder="Address" name="address">
     <input type="password" placeholder="Password"  name="password"/>
     {{ message }}

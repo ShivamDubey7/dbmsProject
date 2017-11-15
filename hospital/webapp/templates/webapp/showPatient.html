@@ -1,5 +1,9 @@
 {% extends 'webapp/base.html' %}
 {% block body %}
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
 
 <style>
 
@@ -58,26 +62,35 @@
 </style>
 
 
-<div class="row">
-	<div class="col-md-1">
+
+
+
+
+
+
+{% if record %}
+Medical records-
+<div class="table">
+	<div class="xrow header">
+		<div class="cell">Report-ID</div>
+		<div class="cell">Remarks</div>
+		<div class="cell">Date examined</div>
 	</div>
-	<div class="col-md-10">
-		Welcome {{ name }} <br/>
-		<form action="{% url 'admin' %}alterdb" method="post">
-			{% csrf_token %}
-			Select a table:
-			<select name="table">
-				{% for entry in tables %}
-				<option>{{ entry }}</option>
-				{% endfor %}
-			</select>
-			<br/>
-			<button class="btn btn-primary" type="submit" name="method" value="Add">Add </button>
-			<button class="btn btn-primary" type="submit" name="method" value="View/Delete">View/delete</button>
-		</form>
-    <br/><br/><br/>
-    <a href="{% url 'recordPayment' %}">Record Payment</a>
-    <br/><br/><br/><br/><br/><br/>
+
+	{% for x in record %}
+	<div class="xrow">
+	{% for y in x %}
+		<div class="cell">{{ y }}</div>
+	{% endfor %}
+	</div>
+	{% endfor %}
+</div>
+{% else %}
+	<center><div class="msg" style="font-size:25px;"><br/><br/><br/>No records for such an ID.<br/><br/></div></center>
+	{% endif %}
+
+
+<a href="{% url 'profile' %}">Go to profile</a>
 
 
 
@@ -86,6 +99,16 @@
 	<div class="col-md-1">
 	</div>
 </div>
+<br/><br/><br/><br/>
+
+<!-- <div class="modify">
+	<center><h3>Modify details</h3></center>
+	<hr/>
+	<form action="{url 'modifypat' %}" method="post">
+		{% csrf_token %}
+
+	</form>
+</div> -->
 
 
 {% endblock %}

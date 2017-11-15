@@ -72,40 +72,59 @@
   $("#specialization").change(function() {
     var x ="." +  ($(this)).val() ;
     console.log(x);
+    $('#doctor').prop('selectedIndex',-1);
     $("#doctor").children("option").hide();
     $("#doctor").children(x).show();
   });
-  
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    }
+    if(mm<10){
+        mm='0'+mm
+    }
+
+    today = yyyy+'-'+mm+'-'+dd;
+    document.getElementById("datefield").setAttribute("min", today);
+
+
 });
-     </script> 
+     </script>
 <div class="container-fluid">
 <div class="login-block">
 
     <h1>Book an appointment</h1>
     <form action="{% url 'appointment' %}" method="post">
     	{% csrf_token %}
+    	<center>
         Select specialization(*):
         <select name="specialization" id="specialization" required>
-            
+
             {% for x in specialization %}
                 <option value="{{ x }}">{{ x }}</option>
             {% endfor %}
         </select>
 
-
+    <br/>
 
          Select doctor(*):
         <select name="doctorID" id="doctor" required>
             {% for x in data %}
             {% for y in x %}
             {% if y != x.0 %}
-                <option hidden class="{{ x.0 }}" value="{{ y.1 }}">{{ y }}</option>
+                <option hidden class="{{ x.0 }}" value="{{ y.1 }}">{{ y.0 }} [ID - {{ y.1 }}]</option>
             {% endif %}
             {% endfor %}
             {% endfor %}
         </select>
 
-        Date: <input type="date" name="date" required>
+    <br/>
+
+        Date: <input id="datefield" type="date" name="date" required>
         <br/>
         <hr/>
         {% if name %}
@@ -115,7 +134,8 @@
         {% endif %}
         {{ message }}
 
-    
+    </center>
+
 </form>
 
 </div>

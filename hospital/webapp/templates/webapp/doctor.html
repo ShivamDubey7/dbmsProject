@@ -68,24 +68,33 @@
 Upcoming appointments
 <div class="table">
 	<div class="xrow header">
-		{% for x in app_details %}
-			<div class="cell">{{ x.0 }}</div>
-		{% endfor %}
+		<div class="cell">Appointment-ID</div>
+		<div class="cell">Patient Name</div>
+		<div class="cell">Date of appointment</div>
 	</div>
 
 	{% for x in app %}
 	<div class="xrow">
-	{% for y in x %}
-		<div class="cell">{{ y }}</div>
-	{% endfor %}
+	<div class="cell">{{ x.0 }}</div>
+	<div class="cell">{{ x.1 }} [ID - {{ x.3 }}]</div>
+	<div class="cell">{{ x.2 }}</div>
 	</div>
 	{% endfor %}
 </div>
+<form action="{% url 'searchPatient' %}" method="post">
+    {% csrf_token %}
+    Check out the patient: <input type="number" placeholder="PatientID" name="id" required>
+    <button>Go!</button>
+</form>
 {% else %}
 No upcoming appointments
 {% endif %}
 
+	</div>
+	<div class="col-md-1">
+	</div>
+</div>
 
-
+<br/><br/><br/><br/>
 
 {% endblock %}
